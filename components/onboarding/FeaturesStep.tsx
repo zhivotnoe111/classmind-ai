@@ -1,41 +1,38 @@
 "use client";
 
-const features = [
-  "Very active class",
-  "Needs additional support",
-  "Strong academic performance",
-  "Enjoys group work",
-  "Mixed ability",
-  "Project-based learning",
-  "Inclusive classroom",
-  "Other",
-];
+import { OnboardingData } from "@/types/onboarding";
 
-export default function FeaturesStep() {
+interface FeaturesStepProps {
+  formData: OnboardingData;
+  setFormData: React.Dispatch<
+    React.SetStateAction<OnboardingData>
+  >;
+}
+
+export default function FeaturesStep({
+  formData,
+  setFormData,
+}: FeaturesStepProps) {
   return (
-    <div className="mx-auto max-w-2xl">
-
+    <div className="mx-auto max-w-xl">
       <h2 className="text-3xl font-bold">
-        Classroom profile
+        What interests you most?
       </h2>
 
-      <p className="mt-3 text-zinc-600">
-        Select everything that describes your classroom.
-      </p>
-
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-
-        {features.map((feature) => (
-          <button
-            key={feature}
-            className="rounded-xl border border-zinc-300 p-5 text-left transition hover:border-indigo-500 hover:bg-indigo-50"
-          >
-            {feature}
-          </button>
-        ))}
-
-      </div>
-
+      <textarea
+        value={formData.features.join(", ")}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            features: e.target.value
+              .split(",")
+              .map((item) => item.trim())
+              .filter(Boolean),
+          })
+        }
+        placeholder="AI Lessons, Homework Generator..."
+        className="mt-8 h-40 w-full rounded-xl border border-zinc-300 p-4"
+      />
     </div>
   );
 }

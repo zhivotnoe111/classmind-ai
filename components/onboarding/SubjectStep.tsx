@@ -1,41 +1,50 @@
 "use client";
 
-const subjects = [
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "Biology",
-  "History",
-  "Geography",
-  "English",
-  "Computer Science",
-];
+import { OnboardingData } from "@/types/onboarding";
 
-export default function SubjectStep() {
+interface StudentsStepProps {
+  formData: OnboardingData;
+  setFormData: React.Dispatch<
+    React.SetStateAction<OnboardingData>
+  >;
+}
+
+export default function StudentsStep({
+  formData,
+  setFormData,
+}: StudentsStepProps) {
   return (
     <div className="mx-auto max-w-xl">
-
       <h2 className="text-3xl font-bold">
-        What subject do you teach?
+        Tell us about your students
       </h2>
 
       <p className="mt-3 text-zinc-600">
-        Choose your primary subject.
+        Approximately how many students are in your class?
       </p>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+      <div className="mt-10">
+        <label className="mb-2 block font-medium">
+          Number of students
+        </label>
 
-        {subjects.map((subject) => (
-          <button
-            key={subject}
-            className="rounded-xl border border-zinc-300 p-5 text-left transition hover:border-indigo-500 hover:bg-indigo-50"
-          >
-            {subject}
-          </button>
-        ))}
-
+        <input
+          type="number"
+          min="1"
+          value={formData.students}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              students:
+                e.target.value === ""
+                  ? ""
+                  : Number(e.target.value),
+            })
+          }
+          placeholder="25"
+          className="w-full rounded-xl border border-zinc-300 p-4 outline-none focus:border-indigo-500"
+        />
       </div>
-
     </div>
   );
 }

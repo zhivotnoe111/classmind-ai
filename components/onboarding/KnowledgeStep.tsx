@@ -1,36 +1,35 @@
 "use client";
 
-const levels = [
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-];
+import { OnboardingData } from "@/types/onboarding";
 
-export default function KnowledgeStep() {
+interface KnowledgeStepProps {
+  formData: OnboardingData;
+  setFormData: React.Dispatch<
+    React.SetStateAction<OnboardingData>
+  >;
+}
+
+export default function KnowledgeStep({
+  formData,
+  setFormData,
+}: KnowledgeStepProps) {
   return (
     <div className="mx-auto max-w-xl">
-
       <h2 className="text-3xl font-bold">
-        Knowledge level
+        Your teaching experience
       </h2>
 
-      <p className="mt-3 text-zinc-600">
-        Describe the overall level of the class.
-      </p>
-
-      <div className="mt-10 space-y-4">
-
-        {levels.map((level) => (
-          <button
-            key={level}
-            className="w-full rounded-xl border border-zinc-300 p-5 text-left transition hover:border-indigo-500 hover:bg-indigo-50"
-          >
-            {level}
-          </button>
-        ))}
-
-      </div>
-
+      <input
+        value={formData.level}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            level: e.target.value,
+          })
+        }
+        placeholder="5 years"
+        className="mt-8 w-full rounded-xl border border-zinc-300 p-4"
+      />
     </div>
   );
 }

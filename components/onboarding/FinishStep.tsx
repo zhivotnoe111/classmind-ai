@@ -1,34 +1,23 @@
 "use client";
 
-import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
+import { OnboardingData } from "@/types/onboarding";
 
-export default function FinishStep() {
+interface FinishStepProps {
+  formData: OnboardingData;
+}
+
+export default function FinishStep({
+  formData,
+}: FinishStepProps) {
   return (
-    <div className="text-center">
-
-      <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-green-100">
-
-        <CheckCircle2 className="h-12 w-12 text-green-600" />
-
-      </div>
-
-      <h2 className="mt-8 text-4xl font-bold">
-        Your classroom is ready!
+    <div className="mx-auto max-w-xl text-center">
+      <h2 className="text-3xl font-bold">
+        Youre all set!
       </h2>
 
-      <p className="mx-auto mt-6 max-w-xl text-lg text-zinc-600">
-        ClassMind is now ready to build lessons using your
-        classroom profile and future classroom memory.
+      <p className="mt-6 text-zinc-600">
+        Welcome to ClassMind AI.
       </p>
-
-      <Link
-        href="/dashboard"
-        className="mt-10 inline-flex rounded-xl bg-indigo-600 px-8 py-4 text-white transition hover:bg-indigo-700"
-      >
-        Go to Dashboard
-      </Link>
-
     </div>
   );
 }
